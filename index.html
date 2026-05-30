@@ -1,48 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiffany Xu</title>
-    <link rel="stylesheet" href="styles.css?v=15">
+    <title>Work — Tiffany Xu</title>
+    <link rel="stylesheet" href="styles.css?v=23">
 </head>
+
 <body>
-    <div class="container">
+    <div class="container" id="siteContainer">
+
+        <div id="aboutDropdown" class="about-dropdown-panel">
+            <div class="about-flex-wrapper">
+                <div class="about-image-container">
+                    <img src="images/about.jpg" alt="Tiffany Xu" onerror="this.style.display='none';">
+                </div>
+                <div class="about-bio-text">
+                    <h2>Tiffany Xu</h2>
+                    <p>Welcome to my creative studio. I am an artist and designer specializing in analog watercolor
+                        illustration, intricate line art workflows, and interactive design.</p>
+                    <p>My work explores the intersections of narrative, texture, and visual storytelling across various
+                        mediums.</p>
+                    <div class="about-contact-info">
+                        <p><strong>Email:</strong> tiffany.xu.art@gmail.com</p>
+                        <p><strong>Instagram:</strong> @tiffany_xu_art</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <header>
             <h1 class="main-title">Tiffany Xu</h1>
             <nav class="nav-buttons">
-                <a href="index.html" class="nav-btn active">About</a>
-                <div class="nav-dropdown">
-                    <a href="work.html" class="nav-btn">Work</a>
-                    <div class="dropdown-content">
-                        <a href="work.html">Illustration</a>
-                        <a href="board-game.html">Board Games</a>
-                        <a href="installation.html">Installation</a>
-                    </div>
-                </div>
+                <a onclick="toggleAboutPanel()" class="nav-btn" id="aboutToggleBtn" role="button">About</a>
+                <a href="index.html" class="nav-btn active">Work</a>
             </nav>
         </header>
 
-        <main class="page-content">
-            <div class="content-section about-layout">
-                <div class="about-image-container">
-                    <img src="images/about.jpg" alt="Tiffany Xu" class="about-image">
-                </div>
-                <div class="about-text">
-                    <h2>Hi, I’m Tiffany Xu, an illustrator.</h2>
-                    <p>My work is driven by an interest in recording daily life, nature, and culture. I am a multi-media creator who enjoys exploring different ways to tell a story—whether through digital drawing, watercolor, or crafting by hand.</p>
-                    <br>
-                    <h3 style="margin-bottom: 12px; font-weight: 500; font-size: 1.3rem;">Contact details</h3>
-                    <p><strong>Email:</strong> <a href="mailto:tsum0243@gmail.com" style="color: inherit; text-decoration: none;">tsum0243@gmail.com</a></p>
-                    <p><strong>Social Media:</strong> <a href="https://www.instagram.com/ar.tiff_?igsh=MWZ2eTgyZ25mOGxwZg==&utm_source=qr" target="_blank" style="color: inherit; text-decoration: none;">@ar.tiff_</a></p>
-                    <p><strong>Linkedin:</strong> <a href="https://www.linkedin.com/in/tiffany-xu-31a6b729b/" target="_blank" style="color: inherit; text-decoration: none;">Tiffany Xu</a></p>
-                </div>
-            </div>
+        <main class="page-content portfolio-index" id="portfolioIndex">
+            <div class="portfolio-list" id="portfolioList" aria-label="Projects"></div>
         </main>
-        
+
         <footer>
-            <p>&copy; 2026 Tiffany Xu. All rights reserved.</p>
+            <p>© 2026 Tiffany Xu. All rights reserved.</p>
         </footer>
     </div>
+
+    <!-- Detail Mode (Master-Detail) -->
+    <div id="projectDetail" class="project-detail" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="project-detail-backdrop" id="projectDetailBackdrop"></div>
+        <div class="project-detail-panel">
+            <button type="button" class="detail-close" id="projectDetailClose" aria-label="Close project">×</button>
+            <div class="detail-layout">
+                <section class="detail-media" aria-label="Project images">
+                    <div class="detail-main-image-wrap" id="detailMainImageWrap">
+                        <img id="detailMainImage" class="detail-main-image" src="" alt="">
+                    </div>
+                    <div class="detail-thumbnail-reel" id="detailThumbnailReel" role="tablist"
+                        aria-label="Project image thumbnails"></div>
+                </section>
+                <aside class="detail-sidebar">
+                    <h2 id="detailTitle" class="detail-title"></h2>
+                    <p id="detailSubtitle" class="detail-subtitle"></p>
+                    <div id="detailDescription" class="detail-description"></div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAboutPanel() {
+            var panel = document.getElementById('aboutDropdown');
+            var btn = document.getElementById('aboutToggleBtn');
+            if (panel.classList.contains('is-open')) {
+                panel.classList.remove('is-open');
+                btn.classList.remove('active');
+            } else {
+                panel.classList.add('is-open');
+                btn.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+    <script src="work.js?v=23"></script>
 </body>
+
 </html>
