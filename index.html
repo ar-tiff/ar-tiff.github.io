@@ -1,89 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work — Tiffany Xu</title>
-    <link rel="stylesheet" href="styles.css?v=23">
+    <title>Tiffany Xu</title>
+    <link rel="stylesheet" href="styles.css?v=25">
 </head>
+<body class="home-page">
+    <main class="home-scatter" aria-label="Home">
+        <div class="home-scatter-canvas">
+            <div class="home-logo"><img src="images/logo.png" alt="Tiffany Xu"></div>
 
-<body>
-    <div class="container" id="siteContainer">
+            <a href="about.html" class="scatter-item scatter-about">About</a>
 
-        <div id="aboutDropdown" class="about-dropdown-panel">
-            <div class="about-flex-wrapper">
-                <div class="about-image-container">
-                    <img src="images/about.jpg" alt="Tiffany Xu" onerror="this.style.display='none';">
-                </div>
-                <div class="about-bio-text">
-                    <h2>Tiffany Xu</h2>
-                    <p>Welcome to my creative studio. I am an artist and designer specializing in analog watercolor
-                        illustration, intricate line art workflows, and interactive design.</p>
-                    <p>My work explores the intersections of narrative, texture, and visual storytelling across various
-                        mediums.</p>
-                    <div class="about-contact-info">
-                        <p><strong>Email:</strong> tiffany.xu.art@gmail.com</p>
-                        <p><strong>Instagram:</strong> @tiffany_xu_art</p>
-                    </div>
-                </div>
-            </div>
+            <a href="unit10.html" class="scatter-item scatter-cover scatter-unit10" aria-label="Unit 10">
+                <img src="images/projects/uni/unit10/1.jpeg" alt="Unit 10">
+            </a>
+
+            <a href="unit4.html" class="scatter-item scatter-cover scatter-unit4" aria-label="Unit 4 — Childhood Monopoly">
+                <img src="images/projects/uni/unit4/u4-01.jpg" alt="Unit 4">
+            </a>
+
+            <a href="unit9.html" class="scatter-item scatter-cover scatter-unit9" aria-label="Sprout City">
+                <img src="images/projects/uni/unit9/cover.jpg" alt="Sprout City">
+            </a>
+
+            <a href="unit8.html" class="scatter-item scatter-cover scatter-unit8" aria-label="What's On Greenwich Today">
+                <img src="images/projects/uni/unit8/cover.jpg" alt="Greenwich">
+            </a>
+
+            <a href="unit7.html" class="scatter-item scatter-cover scatter-unit7" aria-label="Unit 7">
+                <img src="images/projects/uni/unit7/unit73.png" alt="Unit 7">
+            </a>
+
+            <a href="highschool.html" class="scatter-item scatter-cover scatter-highschool" aria-label="High School Projects">
+                <img src="images/projects/highschool/fish1.jpg" alt="High School">
+            </a>
         </div>
-
-        <header>
-            <h1 class="main-title">Tiffany Xu</h1>
-            <nav class="nav-buttons">
-                <a onclick="toggleAboutPanel()" class="nav-btn" id="aboutToggleBtn" role="button">About</a>
-                <a href="index.html" class="nav-btn active">Work</a>
-            </nav>
-        </header>
-
-        <main class="page-content portfolio-index" id="portfolioIndex">
-            <div class="portfolio-list" id="portfolioList" aria-label="Projects"></div>
-        </main>
-
-        <footer>
-            <p>© 2026 Tiffany Xu. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <!-- Detail Mode (Master-Detail) -->
-    <div id="projectDetail" class="project-detail" aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="project-detail-backdrop" id="projectDetailBackdrop"></div>
-        <div class="project-detail-panel">
-            <button type="button" class="detail-close" id="projectDetailClose" aria-label="Close project">×</button>
-            <div class="detail-layout">
-                <section class="detail-media" aria-label="Project images">
-                    <div class="detail-main-image-wrap" id="detailMainImageWrap">
-                        <img id="detailMainImage" class="detail-main-image" src="" alt="">
-                    </div>
-                    <div class="detail-thumbnail-reel" id="detailThumbnailReel" role="tablist"
-                        aria-label="Project image thumbnails"></div>
-                </section>
-                <aside class="detail-sidebar">
-                    <h2 id="detailTitle" class="detail-title"></h2>
-                    <p id="detailSubtitle" class="detail-subtitle"></p>
-                    <div id="detailDescription" class="detail-description"></div>
-                </aside>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function toggleAboutPanel() {
-            var panel = document.getElementById('aboutDropdown');
-            var btn = document.getElementById('aboutToggleBtn');
-            if (panel.classList.contains('is-open')) {
-                panel.classList.remove('is-open');
-                btn.classList.remove('active');
-            } else {
-                panel.classList.add('is-open');
-                btn.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-    </script>
-    <script src="work.js?v=23"></script>
+    </main>
 </body>
-
 </html>

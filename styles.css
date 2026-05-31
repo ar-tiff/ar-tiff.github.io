@@ -7,10 +7,19 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #FFFFFF;
+    background-color: #FAF9F6;
     color: #333333;
     line-height: 1.6;
     min-height: 100vh;
+    cursor: url('images/banana-cursor.png') 12 4, auto;
+}
+
+a,
+button,
+.nav-btn,
+.scatter-item,
+[role="button"] {
+    cursor: url('images/banana-cursor.png') 12 4, pointer;
 }
 
 .container {
@@ -937,3 +946,71 @@ body.detail-mode-open {
         font-size: 1.5rem;
     }
 }
+
+/* ==========================================================================
+   Homepage — Final Locked Layout (绝对锁定坐标版)
+   ========================================================================== */
+
+/* 1. 容器：强制全屏，不随内容变动 */
+.home-scatter-canvas {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+/* 2. Logo：绝对居中，Z轴最低 */
+.home-logo {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    width: 250px; /* 固定宽度，不随屏幕缩放 */
+}
+.home-logo img { width: 100%; height: auto; }
+
+/* 3. About：左上角固定框 */
+.scatter-about {
+    position: absolute;
+    top: 50px; left: 50px;
+    z-index: 100;
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid #333;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* 4. 作品：统一锁定尺寸，禁止移动 */
+.scatter-item {
+    position: absolute;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+.scatter-item img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.scatter-item:hover { z-index: 200; transform: scale(1.1); }
+
+/* 5. 锁定坐标 (Pixel定位，最终微调版) */
+
+/* 5. 锁定坐标 (精准往左挪) */
+
+/* 鱼 (左上角) */
+.scatter-highschool { top: 90px; left: 160px; width: 320px; transform: rotate(-5deg); }
+
+/* Let's Play! (左下角) */
+.scatter-unit4      { bottom: 100px; left: 80px; width: 250px; transform: rotate(-3deg); }
+
+/* 裙子 (底部中间) */
+.scatter-unit7      { bottom: 50px; left: 450px; width: 220px; transform: rotate(2deg); }
+
+/* 瓢虫 (右上角) */
+.scatter-unit10     { top: 70px; right: 350px; width: 320px; transform: rotate(4deg); }
+
+/* 橙色 (中间靠右) */
+.scatter-unit9 { top: 50%; right: 50px; width: 270px; transform: translateY(-50%) rotate(-4deg); }
+
+/* 松鼠 (右下角，已向左挪) */
+.scatter-unit8      { bottom: 40px; right: 400px; width: 240px; transform: rotate(5deg); }
