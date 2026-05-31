@@ -9,7 +9,7 @@
         .project-main-img { max-width: 70%; height: auto; margin: 20px auto; display: block; }
         
         /* 单独展示的大图样式 */
-        .project-extra-img { max-width: 80%; height: auto; margin: 40px auto; display: block; }
+        .project-extra-img { max-width: 80%; height: auto; margin: 40px auto; display: block; cursor: zoom-in; }
         
         .project-subtitle {
             font-size: 16px;
@@ -98,12 +98,12 @@
                         <div class="has-submenu">
                             <a href="#" style="font-weight: bold; color: #000; margin-bottom: 5px;">Work ▾</a>
                             <div class="submenu">
-                                <a href="unit10.html">Unit10: Among the Unhurried</a>
-                                <a href="unit9.html">Unit9: Sprout City</a>
-                                <a href="unit8.html">Unit8: What’s on Greenwich Today</a>
-                                <a href="unit7.html" style="font-weight: bold; color: #000 !important;">Unit7: The Book of Rococo Closet</a>
-                                <a href="unit4.html">Unit4: Childhood Monopoly</a>
-                                <a href="highschool.html">Highschool: Fish Lantern</a>
+                                <a href="unit10.html">Among the Unhurried</a>
+                                <a href="unit9.html">Sprout City</a>
+                                <a href="unit8.html">What’s on Greenwich Today</a>
+                                <a href="unit7.html" style="font-weight: bold; color: #000 !important;">The Book of Rococo Closet</a>
+                                <a href="unit4.html">Childhood Monopoly</a>
+                                <a href="highschool.html">Fish Lantern</a>
                             </div>
                         </div>
                     </nav>
@@ -116,7 +116,7 @@
                 <h2>The Book of Rococo Closet</h2>
                 <p class="project-subtitle">2025 | A4 Zine | Digital Illustration</p>
                 
-                <img src="images/projects/uni/unit7/Unit71.jpg" alt="Rococo Closet Main Image" class="project-main-img">
+                <img src="images/projects/uni/unit7/unit71.JPG" alt="Rococo Closet Main Image" class="project-main-img">
                 
                 <p class="project-desc-text">
                     Deconstructing the Rococo Silhouette is an illustrated A4 zine that peels back the layers of 18th-century French court dresses. Through interactive flaps, readers explore a virtual closet—discovering the purpose of each garment piece, how it shaped the iconic silhouette, and the history behind the era.
@@ -125,9 +125,8 @@
                 <div class="gallery-wrapper">
                     <button class="gallery-nav-btn prev-btn">←</button>
                     <div class="flick-gallery-container" id="gallery">
-                        <img src="images/projects/uni/unit7/Unit72.jpg" class="gallery-slide-img" onclick="openZoom(this.src)">
-                        <img src="images/projects/uni/unit7/unit73.png" class="gallery-slide-img" onclick="openZoom(this.src)">
-                        <img src="images/projects/uni/unit7/Unit74.jpg" class="gallery-slide-img" onclick="openZoom(this.src)">
+                        <img src="images/projects/uni/unit7/unit72.jpg" class="gallery-slide-img" onclick="openZoom(this.src)">
+                        <img src="images/projects/uni/unit7/unit74.jpg" class="gallery-slide-img" onclick="openZoom(this.src)">
                     </div>
                     <button class="gallery-nav-btn next-btn">→</button>
                 </div>
@@ -135,44 +134,27 @@
                 <img src="images/projects/uni/unit7/unit75.png" alt="Rococo Detail" class="project-extra-img" onclick="openZoom(this.src)">
             </div>
         </main>
-        <footer><p>© 2026 Tiffany Xu. All rights reserved.</p></footer>
+        <footer><p style="text-align: center;">© 2026 Tiffany Xu. All rights reserved.</p></footer>
     </div>
 
     <script>
         const gallery = document.getElementById('gallery');
-        const slides = Array.from(document.querySelectorAll('.gallery-slide-img')).map(img => img.src);
-        let currentIndex = 0;
 
         document.querySelector('.next-btn').addEventListener('click', () => gallery.scrollBy({ left: 300, behavior: 'smooth' }));
         document.querySelector('.prev-btn').addEventListener('click', () => gallery.scrollBy({ left: -300, behavior: 'smooth' }));
     
         function openZoom(src) {
-            currentIndex = slides.indexOf(src);
             const modal = document.createElement('div');
             modal.className = 'zoom-modal';
-            modal.style.flexDirection = 'column';
             modal.innerHTML = `
                 <button id="close-zoom" style="position:absolute; top:20px; right:30px; background:none; border:none; color:white; font-size:30px; cursor:pointer;">✕</button>
-                
                 <div style="position:relative; display:flex; align-items:center; width:100%; height:80%;">
-                    <button id="prev-zoom" style="position:absolute; left:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer;">←</button>
                     <img id="zoom-img" src="${src}" style="max-width:80%; max-height:100%; margin:auto;">
-                    <button id="next-zoom" style="position:absolute; right:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer;">→</button>
                 </div>
             `;
-            
             modal.querySelector('#close-zoom').onclick = () => modal.remove();
             modal.onclick = (e) => { if(e.target === modal) modal.remove(); };
-            
-            modal.querySelector('#prev-zoom').onclick = (e) => { e.stopPropagation(); updateZoom(-1); };
-            modal.querySelector('#next-zoom').onclick = (e) => { e.stopPropagation(); updateZoom(1); };
-
             document.body.appendChild(modal);
-        }
-
-        function updateZoom(direction) {
-            currentIndex = (currentIndex + direction + slides.length) % slides.length;
-            document.getElementById('zoom-img').src = slides[currentIndex];
         }
     </script>
 </body>
