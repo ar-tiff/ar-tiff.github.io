@@ -18,25 +18,17 @@
             text-align: left;
         }
         
-        .gallery-wrapper { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 30px; width: 100%; }
+        /* 优化：既然没有了左右导航按钮，我们将包裹器调整为简单的居中布局 */
+        .gallery-wrapper { display: flex; justify-content: center; margin-top: 30px; width: 100%; }
         
+        /* 优化：去掉原有的滚动限制和固定宽度，让单张图片自然居中、美观展示 */
         .flick-gallery-container { 
-            display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth;
-            width: 600px; max-width: 80%; scroll-snap-type: x mandatory; align-items: center;
+            display: flex; justify-content: center; align-items: center; width: auto; max-width: 80%;
         }
-        
-        .flick-gallery-container::-webkit-scrollbar { display: none; }
         
         .gallery-slide-img { 
-            flex: 0 0 auto; height: 300px; width: auto; object-fit: contain; 
-            scroll-snap-align: center; cursor: zoom-in; 
+            height: auto; max-height: 500px; max-width: 100%; object-fit: contain; cursor: zoom-in; 
         }
-        
-        .gallery-nav-btn { 
-            background: transparent; color: #000; border: none; font-size: 24px; 
-            font-weight: bold; cursor: pointer; padding: 10px; flex-shrink: 0;
-        }
-        .gallery-nav-btn:hover { opacity: 0.5; }
         
         .project-desc-text { line-height: 1.6; color: #333; margin-top: 15px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; }
 
@@ -46,14 +38,66 @@
             z-index: 1000; cursor: zoom-out;
         }
         .zoom-modal img { max-width: 90%; max-height: 90%; object-fit: contain; }
+
+        /* 统一汉堡菜单基础样式 */
+        .header-menu-container { position: relative; display: inline-block; }
+        .menu-checkbox { display: none; }
+        .hamburger-btn { cursor: pointer; font-size: 24px; user-select: none; padding: 5px; }
+        
+        /* 一级下拉菜单面板 */
+        .dropdown-menu { 
+            display: none; position: absolute; right: 0; top: 35px; 
+            background: #ffffff; padding: 15px 25px; border: 1px solid #eee; 
+            text-align: right; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 1005; 
+            min-width: 240px;
+        }
+        .dropdown-menu a { display: block; color: #555; text-decoration: none; font-size: 14px; margin: 12px 0; font-family: sans-serif; letter-spacing: 1px; }
+        .dropdown-menu a:hover { color: #000; }
+        .menu-checkbox:checked ~ .dropdown-menu { display: block; }
+
+        /* Work 二级分栏选择项目的样式 */
+        .has-submenu { position: relative; }
+        .submenu { 
+            display: none; 
+            background: #fafafa; padding: 5px 15px 5px 0; margin-top: 5px; 
+            border-right: 2px solid #ddd; text-align: right; 
+        }
+        .submenu a { font-size: 12px !important; margin: 10px 0 !important; color: #777 !important; font-weight: normal !important; }
+        .submenu a:hover { color: #000 !important; }
+        
+        /* 鼠标悬停在 Work 上时自动展开项目列表 */
+        .has-submenu:hover .submenu { display: block; }
     </style>
 </head>
 <body>
     <div class="container">
         <header style="display: flex; justify-content: space-between; align-items: center; padding: 30px 0;">
             <div style="flex: 1;"><a href="index.html" style="text-decoration: none; color: #000; font-size: 24px; font-weight: bold;">←</a></div>
+            
             <div style="text-align: center;"><a href="index.html"><img src="images/logo.png" alt="TIFF Logo" style="height: 80px;"></a></div>
-            <div style="flex: 1;"></div>
+            
+            <div style="flex: 1; display: flex; justify-content: flex-end;">
+                <div class="header-menu-container">
+                    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+                    <label for="menu-toggle" class="hamburger-btn">☰</label>
+                    <nav class="dropdown-menu">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About</a>
+                        
+                        <div class="has-submenu">
+                            <a href="#" style="font-weight: bold; color: #000; margin-bottom: 5px;">Work ▾</a>
+                            <div class="submenu">
+                                <a href="unit10.html">Unit10: Among the Unhurried</a>
+                                <a href="unit9.html">Unit9: Sprout City</a>
+                                <a href="unit8.html">Unit8: What’s on Greenwich Today</a>
+                                <a href="unit7.html">Unit7: The Book of Rococo Closet</a>
+                                <a href="unit4.html" style="font-weight: bold; color: #000 !important;">Unit4: Childhood Monopoly</a>
+                                <a href="highschool.html">Highschool: Fish Lantern</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
         </header>
 
         <main class="page-content">
@@ -68,60 +112,29 @@
                 </p>
 
                 <div class="gallery-wrapper">
-                    <button class="gallery-nav-btn prev-btn">←</button>
                     <div class="flick-gallery-container" id="gallery">
                         <img src="images/projects/uni/unit4/u4-02.jpg" class="gallery-slide-img" onclick="openZoom(this.src)">
                     </div>
-                    <button class="gallery-nav-btn next-btn">→</button>
                 </div>
             </div>
         </main>
-        <footer><p>© 2026 Tiffany Xu. All rights reserved.</p></footer>
+        <footer><p style="text-align: center;">© 2026 Tiffany Xu. All rights reserved.</p></footer>
     </div>
 
     <script>
-        const gallery = document.getElementById('gallery');
-        // 获取所有画廊内的图片链接，用于滑动浏览
-        const slides = Array.from(document.querySelectorAll('.gallery-slide-img')).map(img => img.src);
-        let currentIndex = 0;
-
-        // 页面内导航按钮逻辑
-        document.querySelector('.next-btn').addEventListener('click', () => gallery.scrollBy({ left: 300, behavior: 'smooth' }));
-        document.querySelector('.prev-btn').addEventListener('click', () => gallery.scrollBy({ left: -300, behavior: 'smooth' }));
-    
-        // 放大预览逻辑
+        // 核心修改点：移除了左右按钮的监听事件，只留下纯净无箭头的放大功能
         function openZoom(src) {
-            currentIndex = slides.indexOf(src);
             const modal = document.createElement('div');
             modal.className = 'zoom-modal';
-            modal.style.flexDirection = 'column';
             modal.innerHTML = `
                 <button id="close-zoom" style="position:absolute; top:20px; right:30px; background:none; border:none; color:white; font-size:30px; cursor:pointer;">✕</button>
-                
                 <div style="position:relative; display:flex; align-items:center; width:100%; height:80%;">
-                    <button id="prev-zoom" style="position:absolute; left:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer;">←</button>
                     <img id="zoom-img" src="${src}" style="max-width:80%; max-height:100%; margin:auto;">
-                    <button id="next-zoom" style="position:absolute; right:20px; background:none; border:none; color:white; font-size:40px; cursor:pointer;">→</button>
                 </div>
             `;
-            
-            // 关闭逻辑
             modal.querySelector('#close-zoom').onclick = () => modal.remove();
-            
-            // 点击背景关闭
             modal.onclick = (e) => { if(e.target === modal) modal.remove(); };
-            
-            // 切换图片逻辑
-            modal.querySelector('#prev-zoom').onclick = (e) => { e.stopPropagation(); updateZoom(-1); };
-            modal.querySelector('#next-zoom').onclick = (e) => { e.stopPropagation(); updateZoom(1); };
-
             document.body.appendChild(modal);
-        }
-
-        // 切换函数
-        function updateZoom(direction) {
-            currentIndex = (currentIndex + direction + slides.length) % slides.length;
-            document.getElementById('zoom-img').src = slides[currentIndex];
         }
     </script>
 </body>

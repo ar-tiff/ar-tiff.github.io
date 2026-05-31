@@ -49,14 +49,66 @@
             z-index: 1000; cursor: zoom-out;
         }
         .zoom-modal img { max-width: 90%; max-height: 90%; object-fit: contain; }
+
+        /* 统一汉堡菜单基础样式 */
+        .header-menu-container { position: relative; display: inline-block; }
+        .menu-checkbox { display: none; }
+        .hamburger-btn { cursor: pointer; font-size: 24px; user-select: none; padding: 5px; }
+        
+        /* 一级下拉菜单面板 */
+        .dropdown-menu { 
+            display: none; position: absolute; right: 0; top: 35px; 
+            background: #ffffff; padding: 15px 25px; border: 1px solid #eee; 
+            text-align: right; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 1005; 
+            min-width: 240px;
+        }
+        .dropdown-menu a { display: block; color: #555; text-decoration: none; font-size: 14px; margin: 12px 0; font-family: sans-serif; letter-spacing: 1px; }
+        .dropdown-menu a:hover { color: #000; }
+        .menu-checkbox:checked ~ .dropdown-menu { display: block; }
+
+        /* Work 二级分栏选择项目的样式 */
+        .has-submenu { position: relative; }
+        .submenu { 
+            display: none; 
+            background: #fafafa; padding: 5px 15px 5px 0; margin-top: 5px; 
+            border-right: 2px solid #ddd; text-align: right; 
+        }
+        .submenu a { font-size: 12px !important; margin: 10px 0 !important; color: #777 !important; font-weight: normal !important; }
+        .submenu a:hover { color: #000 !important; }
+        
+        /* 鼠标悬停在 Work 上时自动展开项目列表 */
+        .has-submenu:hover .submenu { display: block; }
     </style>
 </head>
 <body>
     <div class="container">
         <header style="display: flex; justify-content: space-between; align-items: center; padding: 30px 0;">
             <div style="flex: 1;"><a href="index.html" style="text-decoration: none; color: #000; font-size: 24px; font-weight: bold;">←</a></div>
+            
             <div style="text-align: center;"><a href="index.html"><img src="images/logo.png" alt="TIFF Logo" style="height: 80px;"></a></div>
-            <div style="flex: 1;"></div>
+            
+            <div style="flex: 1; display: flex; justify-content: flex-end;">
+                <div class="header-menu-container">
+                    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+                    <label for="menu-toggle" class="hamburger-btn">☰</label>
+                    <nav class="dropdown-menu">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About</a>
+                        
+                        <div class="has-submenu">
+                            <a href="#" style="font-weight: bold; color: #000; margin-bottom: 5px;">Work ▾</a>
+                            <div class="submenu">
+                                <a href="unit10.html">Unit10: Among the Unhurried</a>
+                                <a href="unit9.html">Unit9: Sprout City</a>
+                                <a href="unit8.html">Unit8: What’s on Greenwich Today</a>
+                                <a href="unit7.html" style="font-weight: bold; color: #000 !important;">Unit7: The Book of Rococo Closet</a>
+                                <a href="unit4.html">Unit4: Childhood Monopoly</a>
+                                <a href="highschool.html">Highschool: Fish Lantern</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
         </header>
 
         <main class="page-content">
@@ -88,15 +140,12 @@
 
     <script>
         const gallery = document.getElementById('gallery');
-        // 获取所有画廊内的图片链接，用于滑动浏览
         const slides = Array.from(document.querySelectorAll('.gallery-slide-img')).map(img => img.src);
         let currentIndex = 0;
 
-        // 页面内导航按钮逻辑
         document.querySelector('.next-btn').addEventListener('click', () => gallery.scrollBy({ left: 300, behavior: 'smooth' }));
         document.querySelector('.prev-btn').addEventListener('click', () => gallery.scrollBy({ left: -300, behavior: 'smooth' }));
     
-        // 放大预览逻辑
         function openZoom(src) {
             currentIndex = slides.indexOf(src);
             const modal = document.createElement('div');
@@ -112,20 +161,15 @@
                 </div>
             `;
             
-            // 关闭逻辑
             modal.querySelector('#close-zoom').onclick = () => modal.remove();
-            
-            // 点击背景关闭
             modal.onclick = (e) => { if(e.target === modal) modal.remove(); };
             
-            // 切换图片逻辑
             modal.querySelector('#prev-zoom').onclick = (e) => { e.stopPropagation(); updateZoom(-1); };
             modal.querySelector('#next-zoom').onclick = (e) => { e.stopPropagation(); updateZoom(1); };
 
             document.body.appendChild(modal);
         }
 
-        // 切换函数
         function updateZoom(direction) {
             currentIndex = (currentIndex + direction + slides.length) % slides.length;
             document.getElementById('zoom-img').src = slides[currentIndex];
