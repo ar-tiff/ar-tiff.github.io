@@ -5,11 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Tiffany Xu</title>
     <link rel="stylesheet" href="styles.css?v=24">
+    <style>
+        /* 页面基础布局 */
+        .header-nav { display: flex; justify-content: center; align-items: center; padding: 40px 0; position: relative; }
+        .nav-buttons { position: absolute; right: 0; display: flex; gap: 20px; }
+        .about-layout { display: flex; gap: 60px; align-items: flex-start; margin-top: 40px; }
+        
+        /* 联系方式统一样式 */
+        .contact-list { margin-top: 20px; }
+        .contact-row { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 15px; 
+            text-decoration: none; 
+            color: #333; 
+            transition: color 0.3s ease; 
+        }
+        .contact-row:hover { color: #ec3741; }
+        .contact-row svg { width: 24px; height: 24px; flex-shrink: 0; }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) { 
+            .about-layout { flex-direction: column; } 
+            .nav-buttons { position: static; justify-content: center; margin-top: 20px; }
+            .header-nav { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1 class="main-title">Tiffany Xu</h1>
+        <header class="header-nav">
+            <a href="index.html">
+                <svg viewBox="0 0 144.5 63.7" style="height: 60px; display: block;">
+                    <g><path d="M0,54.1c1.6-4,3-9.3,8-5s2.1,2,2.1,2.2c.8,1.3,1.8,5.7.5,6.7s-2.8,1-3.2,1.1C4.2,59.8,1.6,59.3,0,56.3,0,56.3,0,54.1,0,54.1ZM6.8,50.7c-.6-.5-1.1-1.1-1.9-1.3-1.4,0-3.3,5.2-2.9,6.3.8,2.7,5.5,1.6,7.4.9.2-2.7-.5-4.1-2.5-5.8h0Z"/><path d="M55.5.9c1.2.8.7,3.5.8,4.8.3,3.1,1.1,8.4,2.1,11.3s1.3,1.8.6,3.3c-.4.6-4.2.3-5.1.4-3.8.4-8.4,1.7-12.1,1.9s-2.1-.4-3-.2c-.8.2-.2,4.5,0,5.4.6,5,2.4,12,3.7,16.9s1.7,3.7,2.2,5.2c.8,2.7-1.3,1.3-2.4,1-2.4-.7-5.6-.2-7.7,1.1s-4.4,4.3-6.3,3.3-1.2-6.6-1.2-7.9c0-5.4.3-11.6.7-17s.5-5.2,1-7.8c-3,.8-5.9,1.4-9,1.9s-1.7.7-2.7.7c-2.4,0-2.5-1.5-2.7-3.5-.5-4.3,0-7.8.2-11.9s-.2-6.4,0-6.7c.3-.4,1.6-.5,2.2-.5h10c3.2,0,2.6-.6,3.8-.7s3.7.4,5,.1,1.6-.8,2.5-1C40.8,0,46.8-.1,50,0s5.1.5,5.6.8h0ZM57,18.7c-1.3-2.7-1.3-5.6-1.7-8.5s-1.4-4.8-.7-7.4l-.4-.4-5.8-.5c-3.2.2-7.1-.1-10.2.8-3.1.9-1.7,1-2.5,1.1-1.7.3-3.4-.3-5-.2s-3,.6-4.4.7c-3.5.2-6.9,0-10.4.2.5,6.3-1.2,12.4.3,18.6,2.2-.4,4.4-.8,6.5-1.2s4.9-1.8,7-1.4.5,0,.6.4c.2.7-.8,6-.9,7.4-.5,5.4-.5,11.3-.6,16.7s-.5,5.3.1,8c.3.3,3.6-2.5,4.2-2.8,2.7-1.7,5.3-2,8.5-1.7-.5-1.1-.8-2.2-1.1-3.3-1.2-4.9-4.6-17.4-4-21.9s2.6-2.7,6.2-3,4.1-.5,6-.7c2.8-.3,5.4-1.3,8.3-.9Z"/><path d="M105.1,25.6c-1.9,1.1-4.1.2-6.1,0s-1.9,0-2.9,0c-2.1-.2-4.2-.7-6.3-.5l.3,6.7c1.7-.3,3.3,0,4.9,0,3.4-.1,5.3-.7,9,0s.9,3.2,1.6,5.6,4.7,4.5,0,5.2-8,0-11.7.3-3.1.6-3.2,1.3,2.8,9.1,3.3,10.3,1,2.5,1.5,3.7.4.2.4.4c.6,2.6-1.7,1.8-3,1.8-4.2,0-6.6.5-10.5,2.1-3.9,1.6-2.2,2.1-3-.7-2.5-8.2-1.2-14-1.4-22s-.8-5.7-1-8.6c-.2-4.5,0-9.9.2-14.4s.7-8,1.9-8.6c3,0,6.2-.1,9.2.1s1.9.5,2.7.6c4,.5,10.6.9,14.1,2.8s.3,4.4,0,6.6.3,4.7,0,7v.3ZM88.8,58.7h4.7c-.4-.9-.9-1.8-1.2-2.7-.7-2-1.3-4.2-1.9-6s-3.1-6.2-.6-7.7,9.1-.9,12.4-1.1,2.1-.3,3-.5c-1.6-2-1.8-4.4-1.4-6.8-1.8,0-3.8-.6-5.6-.5s-4.1.3-6.7.3-3,1-3.3-1.4-.2-2.8-.2-3.8-.2-4.8.5-5.3c5-.2,9.9,1,14.9.7.3-2.1,0-4.6.2-6.7s1.5-3.2.3-3.7-3.1-1-4.3-1.2c-5.4-1.1-11-1.5-16.5-1.7s-3-1.3-3.4,1.6c-1.4,8.9-.7,16.8,0,25.6s-.7,11.9.3,18.1,1.1,3.4,1.1,5.2l5.9-2.1,1.9-.3h-.1Z"/><path d="M127.7,20.7v4.3c0,.4,1.6.8,2,.9,2.3.5,5.3.9,7.7.9s4-.6,4.9.2.4,3.5.5,4.5,1,5.8.7,6.7-.7.5-1.1.6c-3.6.8-6.8.4-10.4-.2s-2.6-.9-4-.7c0,3.7,0,7.6.2,11.4s1.3,5.7.3,7.1-3.7,0-4.7.2-2.8.2-3.8.3c-1.4.2-4.8,1.6-5.8,1.3s-.9-3-.9-3.7c0-1.9.4-4.2.5-6.2.4-12.9,0-25.7-1.4-38.5.8-.6,1.8-1.3,2.8-1.5,6.2-1.2,13.2-1.3,19.5-2.3s7-1.9,7.8-1.3c.5,2.5.2,5.1.5,7.7s.3,3.1.5,4.3,2.2,4.1-.4,4.3l-15.4-.2h0ZM141.1,6.8l-26.8,3.9c.9,8.7,1.2,17.5,1.6,26.3l-.6,19.1c1.7-.4,3.4-.9,5.2-1.2s.9,0,1.3,0c1.8-.2,3.6-.8,5.5,0-.4-2.2-.8-4.4-1-6.6s0-3.6-.2-5.3-.2-6.6.6-7.2c5,0,9.7,2.3,14.9,1.1l-.7-8.4c-3.5.4-7.1.1-10.6-.5s-4-.8-4.3-1.7-.4-6.6.3-7.4.2-.2.4-.2l15.7.3c-.9-4-1.4-8.1-1.2-12.2,0,0-.1,0-.1,0Z"/></g>
+                    <g style="fill: #ec3741;"><path d="M71.7,46.2h-.1c-.7-2.8-1.5-5.6-2.3-8.4-.4-.7.2-2.8-.4-3.2-.2-.2-.7-.2-.9-.2s.7-.3-.7-.8-5-.8-7.3-.5c-2.3.3-2-.7-2.3,2.9-.3,3.6-.9,9.1-.3,12.6,0,.5-.4,1.6.8,2.2,1.2.6,3.2-.4,5.6-.3,2.4,0,6.5,2.2,8.6,1.8.3,0,.3.5.8-.4s-.8-2.9-1.5-5.7Z"/><path d="M71.6,26.4c1.2-.7,1.7-6.7,1-7.9-.2-.5-1-1.2-1.4-1.5-3-3.6-5.5-5.3-8.2-.3-1,1.7-3,6.6-1.7,8.1s9.1,2.3,10.3,1.6Z"/></g>
+                </svg>
+            </a>
             <nav class="nav-buttons">
                 <a href="about.html" class="nav-btn active">About</a>
                 <a href="index.html" class="nav-btn">Home</a>
@@ -18,22 +50,34 @@
 
         <main class="page-content">
             <div class="content-section about-layout">
-                <div class="about-image-container">
-                    <img src="images/about.jpg" alt="Tiffany Xu" class="about-image">
+                <div class="about-image-container" style="flex: 1;">
+                    <img src="images/about.jpg" alt="Tiffany Xu" style="width: 100%; height: auto;">
                 </div>
-                <div class="about-text">
+                <div class="about-text" style="flex: 1;">
                     <h2>Hi, I’m Tiffany Xu, an illustrator.</h2>
                     <p>My work is driven by an interest in recording daily life, nature, and culture. I am a multi-media creator who enjoys exploring different ways to tell a story—whether through digital drawing, watercolor, or crafting by hand.</p>
-                    <br>
-                    <h3 style="margin-bottom: 12px; font-weight: 500; font-size: 1.3rem;">Contact details</h3>
-                    <p><strong>Email:</strong> <a href="mailto:tsum0243@gmail.com" style="color: inherit; text-decoration: none;">tsum0243@gmail.com</a></p>
-                    <p><strong>Social Media:</strong> <a href="https://www.instagram.com/ar.tiff_?igsh=MWZ2eTgyZ25mOGxwZg==&utm_source=qr" target="_blank" style="color: inherit; text-decoration: none;">@ar.tiff_</a></p>
-                    <p><strong>Linkedin:</strong> <a href="https://www.linkedin.com/in/tiffany-xu-31a6b729b/" target="_blank" style="color: inherit; text-decoration: none;">Tiffany Xu</a></p>
+                    
+                    <h3 style="margin-top: 30px; margin-bottom: 12px; font-weight: 500; font-size: 1.3rem;">Let's connect:</h3>
+                    
+                    <div class="contact-list">
+                        <a href="mailto:tsum0243@gmail.com" class="contact-row">
+                            <svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"/></svg>
+                            <span>tsum0243@gmail.com</span>
+                        </a>
+                        <a href="https://www.instagram.com/ar.tiff_?igsh=MWZ2eTgyZ25mOGxwZg%3D%3D&utm_source=qr" target="_blank" class="contact-row">
+                            <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/></svg>
+                            <span>@ar.tiff_</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/tiffany-xu-31a6b729b/" target="_blank" class="contact-row">
+                            <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></svg>
+                            <span>Tiffany Xu</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </main>
         
-        <footer>
+        <footer style="margin-top: 60px; text-align: center;">
             <p>&copy; 2026 Tiffany Xu. All rights reserved.</p>
         </footer>
     </div>

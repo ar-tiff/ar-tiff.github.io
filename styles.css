@@ -11,7 +11,7 @@ body {
     color: #333333;
     line-height: 1.6;
     min-height: 100vh;
-    cursor: url('images/banana-cursor.png') 12 4, auto;
+    cursor: url('images/banana-cursor.png') 12 4, auto !important;
 }
 
 a,
@@ -948,10 +948,10 @@ body.detail-mode-open {
 }
 
 /* ==========================================================================
-   Homepage — Final Locked Layout (绝对锁定坐标版)
+   Homepage — 锁定布局与 Logo 交互 (修复版)
    ========================================================================== */
 
-/* 1. 容器：强制全屏，不随内容变动 */
+/* 1. 容器：强制全屏 */
 .home-scatter-canvas {
     position: relative;
     width: 100vw;
@@ -960,18 +960,33 @@ body.detail-mode-open {
     margin: 0;
 }
 
-/* 2. Logo：绝对居中，Z轴最低 */
+/* 2. Logo：绝对居中，开启鼠标交互 */
 .home-logo {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
-    pointer-events: none;
-    width: 250px; /* 固定宽度，不随屏幕缩放 */
+    z-index: 1000;
+    pointer-events: auto !important; 
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
-.home-logo img { width: 100%; height: auto; }
 
-/* 3. About：左上角固定框 */
+.home-logo:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* 3. Logo 变色逻辑 (强制覆盖) */
+.home-logo #i-fill path {
+    fill: #000000 !important;
+    transition: fill 0.3s ease !important;
+}
+
+.home-logo:hover #i-fill path {
+    fill: #ec3741 !important;
+}
+
+/* 4. About：左上角固定 */
 .scatter-about {
     position: absolute;
     top: 50px; left: 50px;
@@ -984,7 +999,7 @@ body.detail-mode-open {
     font-size: 14px;
 }
 
-/* 4. 作品：统一锁定尺寸，禁止移动 */
+/* 5. 作品：锁定尺寸 */
 .scatter-item {
     position: absolute;
     z-index: 10;
@@ -993,24 +1008,10 @@ body.detail-mode-open {
 .scatter-item img { width: 100%; height: auto; display: block; border-radius: 4px; }
 .scatter-item:hover { z-index: 200; transform: scale(1.1); }
 
-/* 5. 锁定坐标 (Pixel定位，最终微调版) */
-
-/* 5. 锁定坐标 (精准往左挪) */
-
-/* 鱼 (左上角) */
+/* 6. 坐标位置 */
 .scatter-highschool { top: 90px; left: 160px; width: 320px; transform: rotate(-5deg); }
-
-/* Let's Play! (左下角) */
 .scatter-unit4      { bottom: 100px; left: 80px; width: 250px; transform: rotate(-3deg); }
-
-/* 裙子 (底部中间) */
 .scatter-unit7      { bottom: 50px; left: 450px; width: 220px; transform: rotate(2deg); }
-
-/* 瓢虫 (右上角) */
 .scatter-unit10     { top: 70px; right: 350px; width: 320px; transform: rotate(4deg); }
-
-/* 橙色 (中间靠右) */
-.scatter-unit9 { top: 50%; right: 50px; width: 270px; transform: translateY(-50%) rotate(-4deg); }
-
-/* 松鼠 (右下角，已向左挪) */
+.scatter-unit9      { top: 50%; right: 50px; width: 270px; transform: translateY(-50%) rotate(-4deg); }
 .scatter-unit8      { bottom: 40px; right: 400px; width: 240px; transform: rotate(5deg); }
